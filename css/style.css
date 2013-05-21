@@ -1,0 +1,16 @@
+.navbar-inner {
+	background-color: #428ddf;
+	background-image: -moz-linear-gradient(center top , #428ddf, #428ddf);
+}
+
+.navbar .brand {
+color: #ffffff
+}
+
+.navbar .nav .active > a, .navbar .nav .active > a:hover {
+    background-color: #155BA9;
+}
+.ui-widget-content
+{
+	background:#FFFFFF;
+}
