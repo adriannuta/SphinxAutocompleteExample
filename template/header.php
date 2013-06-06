@@ -34,7 +34,7 @@
 	  <div class="span2">
 	   <div class="sitebar-nav">
 	    <ul class="nav nav-list">
-			<li><a href="http://sphinxsearch.com/blog/2012/07/23/simple-autocomplete-and-correction-suggestion/">Original article</a>
+			<li><a href="http://sphinxsearch.com/blog/2013/05/21/simple-autocomplete-and-correction-suggestion/">Original article</a>
 			</li>
 		<ul>
 		</div>

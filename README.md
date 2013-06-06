@@ -1,15 +1,40 @@
 SphinxAutocompleteExample
 =========================
+
+These samples illustrate autocomplete and type suggestion using Sphinx search.     
+Sphinx querying is made via SphinxQL using PDO driver.    
+The sample data included contains a version of Sphinx documentation.  
+The samples are featured on [this Sphinx blog post] (http://sphinxsearch.com/blog/2013/05/21/simple-autocomplete-and-correction-suggestion/).    
+
+Requirements :
+-------------------------------------------
+LAMP  
+Sphinx search  
+PHP with PDO mysql  
+
 Installation :
 -------------------------------------------
-Minimum Sphinx version 2.0.4 , recommended latest release or trunk.  
-Dataset is not provided , you need to create it or adapt an existing one in the sphinx.conf.  
-You need edit sphinx.conf according to your DB settings, paths , adapting queries to your tables.
-Some javascript files are not included , their Google CDN version is used.  
-You will need to create the suggest index as well , the index is included in provided sphinx.conf ,
-and in /scripts/suggest/ are found  instructions on how to build it .  
-The project was tested under Apache web-server , but it should work with no problem with any.
+Edit `scripts/sphinx.conf` for setting proper paths and db credentials
+Import the sample tables in your database.    
+Untar first the two archieves in `scripts` folder:
+    
+    $ tar -xzvf suggest.tar.gz 
+    $ tar -xzvf docs.tar.gz
+    $ mysql < suggest.sql
+    $ mysql < docs.sql
+Alternative you can build the suggest table by following instructions in `scripts/suggest/README`
 
+The samples use 3 indexes : `simplecompletefull` for doing the actual search, `simplecomplete` for autocomplete  and `suggest` for suggestions.   
+`simpletecompletefull` can be used for autocomplete as well, if the search for completion is made only on title ( `@title $query` ).   
+Index the 3 indexes:
+ 
+    $ indexer -c /path/to/sphinx.conf --all
+    
+Start a new Sphinx server using sphinx.conf from `scripts` folder or import the indexes if you already have a running Sphinx server. 
+ 
+    $ searchd -c /path/to/sphinx.conf
+In case you start a new Sphinx server, be sure to change the ports in sphinx.conf and common.php.
+Also in common.php edit the database credentials.   
 
 License:
 -------------------------------------------

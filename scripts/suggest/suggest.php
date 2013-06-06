@@ -6,7 +6,7 @@ define ( "LENGTH_THRESHOLD", 2 );
 define ( "LEVENSHTEIN_THRESHOLD", 2 );
 define ( "TOP_COUNT", 10 );
 
-require ( "../../api/sphinxapi.php" );
+require ( "../../sphinxapi.php" );
 
 /// build a list of trigrams for a given keywords
 function BuildTrigrams ( $keyword )
