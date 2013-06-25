@@ -33,8 +33,9 @@ Index the 3 indexes:
 Start a new Sphinx server using sphinx.conf from `scripts` folder or import the indexes if you already have a running Sphinx server. 
  
     $ searchd -c /path/to/sphinx.conf
-In case you start a new Sphinx server, be sure to change the ports in sphinx.conf and common.php.
-In common.php edit the database credentials. For Sphinx 2.1.1 or greater or trunk version, set constant SPHINX_20 to false.         
+In case you start a new Sphinx server, be sure to change the ports in **sphinx.conf** and **common.php**.
+In **common.php** edit the database credentials. For Sphinx 2.1.1 or greater or trunk version, set constant `SPHINX_20` to **false**.         
+Autocomplete starts after typing 3 characters. To change this you need to edit in **sphinx.conf** `min_prefix_len` and `min_word_len` and in **footer.php** and **footer_excerpts.php** the `minLength` ( which trigger firing the ajax call).  
 
 
 License:
