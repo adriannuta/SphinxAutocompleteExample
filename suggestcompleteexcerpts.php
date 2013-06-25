@@ -70,7 +70,7 @@ include 'template/header.php';
 			<div class="well form-search">
 				<form method="GET" action="" id="search_form">
 					<input type="text" class="input-large" name="query" id="suggest"
-						autocomplete="off" value="<?=isset($_GET['query'])?$_GET['query']:''?>"> <input
+						autocomplete="off" value="<?=isset($_GET['query'])?htmlentities($_GET['query']):''?>"> <input
 						type="submit" class="btn btn-primary" id="send" name="send"
 						value="Submit">
 				</form>
