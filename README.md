@@ -34,7 +34,8 @@ Start a new Sphinx server using sphinx.conf from `scripts` folder or import the 
  
     $ searchd -c /path/to/sphinx.conf
 In case you start a new Sphinx server, be sure to change the ports in sphinx.conf and common.php.
-Also in common.php edit the database credentials.   
+In common.php edit the database credentials. For Sphinx 2.1.1 or greater or trunk version, set constant SPHINX_20 to false.         
+
 
 License:
 -------------------------------------------

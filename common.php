@@ -4,6 +4,7 @@ define ( "SUGGEST_DEBUG", 0);
 define ( "LENGTH_THRESHOLD", 2 );
 define ( "LEVENSHTEIN_THRESHOLD", 2 );
 define ( "TOP_COUNT", 1 );
+define ("SPHINX_20",false);
 //database PDO
 $ln = new PDO( 'mysql:host=127.0.0.1;dbname=MYDB;charset=utf8', 'MYUSER', 'MYPASS' );
 

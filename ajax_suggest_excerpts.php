@@ -1,5 +1,5 @@
 <?php
-require_once 'sphinxapi.php';
+
 require_once 'common.php';
 require_once 'functions.php';
 $indexes = 'simplecomplete';
