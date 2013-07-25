@@ -53,7 +53,7 @@ include 'template/header.php';
 ?>
 <div class="container">
 	<ul class="nav nav-pills">
-		<li><a href="simplecomplete.php">Autocomplete on titles</a></li>
+		<li><a href="index.php">Autocomplete on titles</a></li>
 		<li class="active"><a href="suggestcomplete.php">Autocomplete on
 				titles + suggestion</a></li>
 		<li><a href="suggestcompleteexcerpts.php">Autocomplete on titles +
