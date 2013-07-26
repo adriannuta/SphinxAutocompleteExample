@@ -20,7 +20,7 @@ function MakeSuggestion($keyword,$ln)
 	if(SPHINX_20 == true) {
 	    $weight ='@weight';
 	}
-	$stmt = $ln->prepare("SELECT *,$weight+:delta-ABS(len-:len) as myrank FROM suggest WHERE MATCH(:match) AND len BETWEEN :lowlen AND :highlen
+	$stmt = $ln->prepare("SELECT *, $weight as w, w+:delta-ABS(len-:len) as myrank FROM suggest WHERE MATCH(:match) AND len BETWEEN :lowlen AND :highlen
 			ORDER BY myrank DESC, freq DESC
 			LIMIT 0,:topcount OPTION ranker=wordcount");
 
