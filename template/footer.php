@@ -12,42 +12,47 @@
 
 <script>
 function __highlight(s, t) {
-  var matcher = new RegExp("("+$.ui.autocomplete.escapeRegex(t)+")", "ig" );
-  return s.replace(matcher, "<strong>$1</strong>");
+    var matcher = new RegExp("(" + $.ui.autocomplete.escapeRegex(t) + ")", "ig");
+    return s.replace(matcher, "<strong>$1</strong>");
 }
-$(document).ready(function() {
-        $( "#suggest" ).autocomplete({
-                    source: function(request, response) {
-     $.ajax({
-      url: '<?=$ajax_url;?>',
-      dataType: 'json',
-      data: { term: request.term },
+$(document).ready(
+	function() {
+	    $("#suggest").autocomplete(
+		    {
+			source : function(request, response) {
+			    $.ajax({
+				url : '<?=$ajax_url;?>',
+				dataType : 'json',
+				data : {
+				    term : request.term
+				},
 
-      success: function(data) {
-       response($.map(data, function(item) {
-        return {label: __highlight(item.label, request.term) ,
-            value: item.label};
-       }));
-      }
-     });
-    },
-                        minLength: 3,
-                        select: function( event, ui ) {
-						
-                                $('#searchbutton').submit();
-                        }
-                }).keydown(function(e){
-if (e.keyCode === 13){
-$("#search_form").trigger('submit');
-}
-}).data( "autocomplete" )._renderItem = function( ul, item ) {
+				success : function(data) {
+				    response($.map(data, function(item) {
+					return {
+					    label : __highlight(item.label,
+						    request.term),
+					    value : item.label
+					};
+				    }));
+				}
+			    });
+			},
+			minLength : 3,
+			select : function(event, ui) {
 
-           return $( "<li></li>" )
-              .data( "item.autocomplete", item )
-              .append( $( "<a></a>" ).html(item.label) )
-              .appendTo( ul );
-          };
-        });
+			    $('#searchbutton').submit();
+			}
+		    }).keydown(function(e) {
+		if (e.keyCode === 13) {
+		    $("#search_form").trigger('submit');
+		}
+	    }).data("autocomplete")._renderItem = function(ul, item) {
+
+		return $("<li></li>").data("item.autocomplete", item).append(
+			$("<a></a>").html(item.label)).appendTo(ul);
+	    };
+	});
 </script>
 
 </body>
