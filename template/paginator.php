@@ -1,4 +1,4 @@
-<?php $pageCount = ceil($total_found/$offset);?>
+<?php $pageCount = ceil($total/$offset);?>
 <?php if ($pageCount): ?>
 <?php 
 $start = 0;

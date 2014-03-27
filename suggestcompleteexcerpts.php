@@ -27,6 +27,7 @@ if (isset($_GET['query']) && trim($_GET['query']) != '') {
 	    $meta_map[$m['Variable_name']] = $m['Value'];
 	}
 	$total_found = $meta_map['total_found'];
+	$total = $$meta_map['total'];
 	$ids = array();
 	$tmpdocs = array();
 	if (count($rows) > 0) {

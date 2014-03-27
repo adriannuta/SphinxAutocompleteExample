@@ -19,10 +19,12 @@ if (isset($_GET['query']) && trim($_GET['query']) != '') {
 	$stmt->bindValue(':match', $query,PDO::PARAM_STR);
 	$stmt->execute();
 	$rows = $stmt->fetchAll();
-
-	$meta = $ln_sph->query("SHOW META LIKE 'total_found'")->fetch();
-	$total_found = $meta['Value'];
-
+	$meta = $ln_sph->query("SHOW META")->fetchAll();
+	foreach($meta as $m) {
+	    $meta_map[$m['Variable_name']] = $m['Value'];
+	}
+	$total_found = $meta_map['total_found'];
+    $total = $meta_map['total'];
 	$ids = array();
 	$tmpdocs = array();
 	if (count($rows)> 0) {
