@@ -4,17 +4,28 @@ require_once 'common.php';
 require_once 'functions.php';
 
 $docs = array();
+$start =0;
+$offset =10;
+$current = 1;
+$url = 'suggestcomplete.php';
 $mis = array();
 $suggest = false;
 if (isset($_GET['query']) && trim($_GET['query']) != '') {
 	$query = trim($_GET['query']);
 	$indexes = 'simplecompletefull';
-
-	$stmt = $ln_sph->prepare("SELECT * FROM $indexes WHERE MATCH(:match)  LIMIT 0,10 OPTION ranker=sph04,field_weights=(title=100,content=1)");
+	if(isset($_GET['start'])) {
+	    $start = $_GET['start'];
+	    $current = $start/$offset+1;
+	}
+	$stmt = $ln_sph->prepare("SELECT * FROM $indexes WHERE MATCH(:match)  LIMIT $start,$offset OPTION ranker=sph04,field_weights=(title=100,content=1)");
 	$stmt->bindValue(':match', $query,PDO::PARAM_STR);
 	$stmt->execute();
 	$rows = $stmt->fetchAll();
 	$meta = $ln_sph->query("SHOW META")->fetchAll();
+	foreach($meta as $m) {
+	    $meta_map[$m['Variable_name']] = $m['Value'];
+	}
+	$total_found = $meta_map['total_found'];
 	$ids = array();
 	$tmpdocs = array();
 	if (count($rows)> 0) {
@@ -30,19 +41,19 @@ if (isset($_GET['query']) && trim($_GET['query']) != '') {
 		}
 	} else {
 		$words = array();
-		foreach($meta as $m) {
-			$meta_map[$m['Variable_name']] = $m['Value'];
-			if(preg_match('/keyword\[\d+]/', $m['Variable_name'])) {
-				preg_match('/\d+/', $m['Variable_name'],$key);
+		foreach($meta_map as $k=>$v) {
+			
+			if(preg_match('/keyword\[\d+]/', $k)) {
+				preg_match('/\d+/', $k,$key);
 				$key = $key[0];
-				$words[$key]['keyword'] = $m['Value'];
+				$words[$key]['keyword'] = $v;
 			}
-			if(preg_match('/docs\[\d+]/', $m['Variable_name'])) {
-				preg_match('/\d+/', $m['Variable_name'],$key);
+			if(preg_match('/docs\[\d+]/', $k)) {
+				preg_match('/\d+/', $k,$key);
 				$key = $key[0];
-				$words[$key]['docs'] = $m['Value'];
+				$words[$key]['docs'] = $v;
 			}
-		}
+		} 
 		$suggest = MakePhaseSuggestion($words, $query, $ln_sph);
 	}
 }
@@ -94,13 +105,12 @@ include 'template/header.php';
 		</div>
 	</div>
 	<?php endif; ?>
-	<div class="row">
-		<?php if (count($docs) > 0): ?>
-		<p class="lead">
-			Showing first 10 from
-			<?= $result['total_found'] ?>
-			results for <i><?= $_GET['query'] ?> </i>:
-		</p>
+	<p class="lead">
+		Total found:<?=$total_found?>
+	</p>
+	<div class="row"><div class="span" style="display: none;"></div>
+	<?php if (count($docs) > 0): ?>
+        <div class="span9"><?php include 'template/paginator.php';?></div>
 		<?php foreach ($docs as $doc): ?>
 		<div class="span9">
 			<div class="container">
@@ -114,6 +124,7 @@ include 'template/header.php';
 			</div>
 		</div>
 		<?php endforeach; ?>
+		<div class="span9"><?php include 'template/paginator.php';?></div>
 		<?php elseif (isset($_GET['query']) && $_GET['query'] != ''): ?>
 		<p class="lead">Nothing found!</p>
 		<?php endif; ?>
