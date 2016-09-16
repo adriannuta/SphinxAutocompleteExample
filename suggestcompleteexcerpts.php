@@ -103,7 +103,9 @@ include 'template/header.php';
 	<div class="row"><div class="span" style="display: none;"></div>
 		<?php if (count($docs) > 0): ?>
 		<p class="lead">
+		<?php if(isset($total_found)):?>
 		      Total found:<?=$total_found?>
+		<?php endif;?>
 	   </p>
 	   <div class="span9"><?php include 'template/paginator.php';?></div>
 		<?php foreach ($docs as $doc): ?>

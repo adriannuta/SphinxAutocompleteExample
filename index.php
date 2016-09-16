@@ -75,7 +75,9 @@ include 'template/header.php';
 		</div>
 	</div>
 	<p class="lead">
-		Total found:<?=$total_found?>
+		<?php if(isset($total_found)):?>
+		      Total found:<?=$total_found?>
+		<?php endif;?>
 	</p>
 	<div class="row"><div class="span" style="display: none;"></div>
 		<?php if (count($docs) > 0): ?>
