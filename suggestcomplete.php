@@ -68,6 +68,8 @@ include 'template/header.php';
 		<li><a href="index.php">Autocomplete on titles</a></li>
 		<li class="active"><a href="suggestcomplete.php">Autocomplete on
 				titles + suggestion</a></li>
+		<li><a href="qsuggest.php">Autocomplete on titles + CALL SUGGEST</a>
+		</li>				
 		<li><a href="suggestcompleteexcerpts.php">Autocomplete on titles +
 				suggestion + excerpts</a></li>
 	</ul>

@@ -15,14 +15,14 @@ $last = $pageCount;
 <div class="paginationControl">
 <!-- First page link -->
 <?php if (isset($previous)): ?>
-  <a href="<?echo $url;?>?query=<?php echo $query;?>&start =<?php echo $first*$offset;?>">
+  <a href="<?php echo $url;?>?query=<?php echo $query;?>&start =<?php echo $first*$offset;?>">
     <i class="icon-step-backward"></i></a> |
 <?php else: ?>
   <i class="icon-step-backward disabled"></i></a> |
 <?php endif; ?>
 <!-- Previous page link -->
 <?php if (isset($previous)): ?>
-  <a href="<?echo $url;?>?query=<?php echo $query;?>&start=<?php echo ($previous-1)*$offset;?>">
+  <a href="<?php echo $url;?>?query=<?php echo $query;?>&start=<?php echo ($previous-1)*$offset;?>">
     <i class="icon-arrow-left"></i></a> |
 <?php else: ?>
   <span class="disabled"><i class="icon-arrow-left"></i></span> |
@@ -32,7 +32,7 @@ $last = $pageCount;
 <?php for($page = ($current-$range);$page < ($current+$range+1);$page++): ?>
  <?php if ($page > 0 && $page <=$pageCount): ?>
   <?php if ($page != $current): ?>
-    <a href="<?echo $url;?>?query=<?php echo $query;?>&start=<?php echo ($page-1)*$offset;?>">
+    <a href="<?php echo $url;?>?query=<?php echo $query;?>&start=<?php echo ($page-1)*$offset;?>">
         <?php echo $page; ?>
     </a> |
   <?php else: ?>
@@ -43,7 +43,7 @@ $last = $pageCount;
 
 <!-- Next page link -->
 <?php if (isset($next)): ?>
-  <a href="?<?echo $url;?>query=<?php echo $query;?>&start=<?php echo ($next-1)*$offset;?>">
+  <a href="?<?php echo $url;?>query=<?php echo $query;?>&start=<?php echo ($next-1)*$offset;?>">
    <i class="icon-arrow-right"></i></a>|
 <?php else: ?>
   <span class="disabled"><i class="icon-arrow-right"></i></span> |
@@ -51,7 +51,7 @@ $last = $pageCount;
 
 <!-- Last page link -->
 <?php if (isset($next)): ?>
-  <a href="<?echo $url;?>?query=<?php echo $query;?>&start=<?php echo ($last-1)*$offset?>">
+  <a href="<?php echo $url;?>?query=<?php echo $query;?>&start=<?php echo ($last-1)*$offset?>">
     <i class="icon-step-forward"></i>
   </a>
 <?php else: ?>

@@ -10,7 +10,7 @@ $current = 1;
 $url = '';
 if (isset($_GET['query']) && trim($_GET['query']) != '') {
 	$query = trim($_GET['query']);
-	$indexes = 'simplecompletefull';
+	$indexes = 'simplecomplete';
 	if(isset($_GET['start'])) {
 	    $start = $_GET['start'];
 	    $current = $start/$offset+1;
@@ -52,6 +52,8 @@ include 'template/header.php';
 		<li class="active"><a href="index.php">Autocomplete on titles</a>
 		</li>
 		<li><a href="suggestcomplete.php">Autocomplete on titles + suggestion</a>
+		</li>
+		<li><a href="qsuggest.php">Autocomplete on titles + CALL SUGGEST</a>
 		</li>
 		<li><a href="suggestcompleteexcerpts.php">Autocomplete on titles +
 				suggestion + excerpts</a></li>

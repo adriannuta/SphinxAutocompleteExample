@@ -8,7 +8,52 @@ function BuildTrigrams($keyword)
 		$trigrams .= substr($t, $i, 3) . " ";
 	return $trigrams;
 }
+function MakeQSuggest($keyword,$index,$ln_sph)
+{
+    $stmt = $ln_sph->prepare("CALL SUGGEST(:keyword,'$index')");
+    $stmt->bindValue(':keyword', $keyword,PDO::PARAM_STR);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC); 
+    return $row['suggest'];
+}
 
+function MakeMultiQSuggest($words,$query,$index,$ln_sph)
+{
+    $suggested = array();
+    $llimf = 0;
+    $i = 0;
+    foreach ($words  as $key => $word) {
+        if ($word['docs'] != 0)
+            $llimf +=$word['docs'];$i++;
+    }
+    $llimf = $llimf / ($i * $i);
+    foreach ($words  as $key => $word) {
+        if ($word['docs'] == 0 | $word['docs'] < $llimf) {
+            $mis[] = $word['keyword'];
+        }
+    }
+    if (count($mis) > 0) {
+        foreach ($mis as $m) {
+            $re = MakeQSuggest($m,$index, $ln_sph);  
+            if ($re) {
+                if($m!=$re)
+                    $suggested[$m] = $re;
+            }
+        }
+        if(count($words) ==1 && empty($suggested)) {
+            return false;
+        }
+        $phrase = explode(' ', $query);
+        foreach ($phrase as $k => $word) {
+            if (isset($suggested[strtolower($word)]))
+                $phrase[$k] = $suggested[strtolower($word)];
+        }
+        $phrase = implode(' ', $phrase);
+        return $phrase;
+    }else{
+        return false;
+    }
+}
 function MakeSuggestion($keyword,$ln) 
 {
 	$trigrams = BuildTrigrams($keyword);
