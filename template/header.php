@@ -19,12 +19,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Sphinx Samples</a>
+          <a class="brand" href="http://demos.sphinxsearch.com">Sphinx Samples</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="http://sphinxsearch.com">Home</a></li>
-
+              <li class="active"><a href="/SphinxAutocompleteExample/">Autocomplete</a></li>
+	      <li ><a href="/SphinxFacetingExample/">Faceting</a></li>
+	      <li ><a href="/SphinxGeoExample/">Geo</a></li>
             </ul>
+	        <ul class="nav pull-right">
+                 <li ><a href="https://github.com/adriannuta/SphinxAutocompleteExample">Source code</a></li>
+          </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
