@@ -1,15 +1,15 @@
 SphinxAutocompleteExample
 =========================
 
-These samples illustrate autocomplete and type suggestion using Sphinx search.     
-Sphinx querying is made via SphinxQL using PDO driver.    
+These samples illustrate autocomplete and type suggestion using Manticore/Sphinx search.     
+Querying is made via SphinxQL using PDO driver.    
 The sample data included contains a version of Sphinx documentation.  
 The samples are featured on [this Sphinx blog post] (http://sphinxsearch.com/blog/2013/05/21/simple-autocomplete-and-correction-suggestion/).    
 
 Requirements :
 -------------------------------------------
 LAMP  
-Sphinx search  
+Manticore or Sphinx search  
 PHP with PDO mysql  
 
 Installation :
@@ -30,19 +30,20 @@ Index the 3 indexes:
  
     $ indexer -c /path/to/sphinx.conf --all
     
-Start a new Sphinx server using sphinx.conf from `scripts` folder or import the indexes if you already have a running Sphinx server. 
+Start a new Manticore/Sphinx server using sphinx.conf from `scripts` folder or import the indexes if you already have a running Sphinx server. 
  
     $ searchd -c /path/to/sphinx.conf
-In case you start a new Sphinx server, be sure to change the ports in **sphinx.conf** and **common.php**.
-In **common.php** edit the database credentials. For Sphinx 2.1.1 or greater or trunk version, set constant `SPHINX_20` to **false**.         
+In case you start a new Manticore/Sphinx server, be sure to change the ports in **sphinx.conf** and **common.php**.
+In **common.php** edit the database credentials. For Sphinx 2.1.1 or greater/Manticore or trunk version, set constant `SPHINX_20` to **false**.         
 Autocomplete starts after typing 3 characters. To change this you need to edit in **sphinx.conf** `min_prefix_len` and `min_word_len` and in **footer.php** and **footer_excerpts.php** the `minLength` ( which trigger firing the ajax call).  
 
-Live demo:   
+Live demo with Sphinx :   
 -------------------------------------------  
 http://demos.sphinxsearch.com/SphinxAutocompleteExample/
 License:
 -------------------------------------------
 Sphinx Samples  is free software, and is released under the terms of the GPL version 2 or (at your option) any later version.
-
+Manticore website : https://manticoresearch.com/
+Manticore repository : https://github.com/manticoresoftware/manticore
 Sphinx website : http://sphinxsearch.com/  
 Sphinx read-only repository :https://github.com/sphinxsearch/sphinx
